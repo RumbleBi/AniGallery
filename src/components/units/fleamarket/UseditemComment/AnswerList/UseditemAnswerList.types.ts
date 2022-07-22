@@ -1,12 +1,21 @@
-import { IUseditemQuestion } from '../../../../../commons/types/generated/types'
-
+import {
+  IUseditem,
+  IUseditemQuestion,
+  IUseditemQuestionAnswer,
+} from '../../../../../commons/types/generated/types'
 export interface IUseditemAnswerListProps {
-  answersData: IUseditemQuestion
-  elId?: string
+  answersData: IUseditemQuestionAnswer
+  elId: string
+  useditemQuestionId: string | undefined
 }
 
 export interface IUseditemAnswerListUIProps {
   onLoadMore: () => void
-  answersData: IUseditemQuestion
-  elId?: IUseditemQuestion
+  answersData: IUseditemQuestionAnswer
+  elId?: string
+}
+export interface IUseditemAnswerListItemUIProps {
+  elId?: string
+  el?: any
+  answersData?: IUseditemQuestionAnswer
 }

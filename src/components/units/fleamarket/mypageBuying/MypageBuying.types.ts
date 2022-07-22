@@ -1,9 +1,7 @@
 import { ApolloQueryResult } from '@apollo/client'
-import { Maybe } from 'graphql/jsutils/Maybe'
 import {
   IQuery,
   IQueryFetchPointTransactionsOfBuyingArgs,
-  IUseditem,
 } from '../../../../commons/types/generated/types'
 
 export interface IMypageBuyingUIProps {

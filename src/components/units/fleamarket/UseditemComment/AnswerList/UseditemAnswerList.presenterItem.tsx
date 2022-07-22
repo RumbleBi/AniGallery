@@ -11,8 +11,11 @@ import {
 } from './UseditemAnswerList.queries'
 import * as S from './UseditemAnswerList.styles'
 import UseditemAnswerWrite from '../AnswerWrite/UseditemAnswerWrite'
+import { IUseditemAnswerListItemUIProps } from './UseditemAnswerList.types'
 
-export default function UseditemAnswerListItemUI(props) {
+export default function UseditemAnswerListItemUI(
+  props: IUseditemAnswerListItemUIProps
+) {
   const [isEdit, setIsEdit] = useState(false)
   const [deleteUseditemQuestionAnswer] = useMutation<
     Pick<IMutation, 'deleteUseditemQuestionAnswer'>,

@@ -1,7 +1,6 @@
 import {
   IQuery,
   IUseditemQuestion,
-  IUseditemQuestionAnswer,
 } from '../../../../../commons/types/generated/types'
 
 export interface IUseditemCommentListUIProps {

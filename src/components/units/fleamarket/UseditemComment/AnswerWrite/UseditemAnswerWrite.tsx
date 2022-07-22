@@ -11,8 +11,9 @@ import {
   IMutationUpdateUseditemQuestionAnswerArgs,
 } from '../../../../../commons/types/generated/types'
 import { ChangeEvent, useState } from 'react'
+import { IUseditemAnswerWriteProps } from './UseditemAnswerWrite.types'
 
-export default function UseditemAnswerWrite(props) {
+export default function UseditemAnswerWrite(props: IUseditemAnswerWriteProps) {
   const [contents, setContents] = useState('')
 
   const [createUseditemQuestionAnswer] = useMutation<

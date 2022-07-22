@@ -24,7 +24,7 @@ export default function UseditemAnswerList(props: IUseditemAnswerListProps) {
       variables: {
         page:
           Math.ceil(
-            props.answersData?.fetchUseditemQuestionAnswers.length / 10
+            props.answersData?.fetchUseditemQuestionAnswers?.length / 10
           ) + 1,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
