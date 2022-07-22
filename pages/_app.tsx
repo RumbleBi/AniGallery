@@ -32,10 +32,10 @@ interface IGlobalContext {
   setAccessToken?: Dispatch<SetStateAction<string>>
   userInfo?: IUserInfo
   setUserInfo?: Dispatch<SetStateAction<IUserInfo>>
-  setItem?: String | any
-  item?: String
+  setItem?: Dispatch<SetStateAction<never[]>>
+  item?: never[]
   isLoggedIn?: boolean
-  setIsLoggedIn?: any
+  setIsLoggedIn?: Dispatch<SetStateAction<boolean>>
 }
 export const GlobalContext = createContext<IGlobalContext>({})
 

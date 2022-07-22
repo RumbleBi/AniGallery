@@ -1,9 +1,9 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
-import { useMutation } from '@apollo/client'
+import { FetchResult, useMutation } from '@apollo/client'
 import BoardWriteUI from './BoardWrite.presenter'
 import { CREATE_BOARD, UPDATE_BOARD, UPLOAD_FILE } from './BoardWrite.queries'
-import { IBoardWriteProps } from './BoardWrite.types'
+import { IBoardWriteProps, IUpdateBoardInput } from './BoardWrite.types'
 import {
   IMutation,
   IMutationCreateBoardArgs,
@@ -12,6 +12,7 @@ import {
 } from '../../../../commons/types/generated/types'
 import { Modal } from 'antd'
 import { checkFileValidation } from '../../../../commons/libraries/utils'
+
 export default function BoardWrite(props: IBoardWriteProps) {
   const router = useRouter()
   // useRef로 포커싱 되도록 함
@@ -40,7 +41,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const [password, setPassword] = useState('')
   const [post, setPost] = useState('')
   const [content, setContent] = useState('')
-  const [image, setImage] = useState([])
+  const [image, setImage] = useState(['', '', ''])
   const [writerError, setWriterError] = useState('')
   const [passwordError, setPasswordError] = useState('')
   const [postError, setPostError] = useState('')
@@ -93,22 +94,10 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
     setYoutubeUrl(event.target.value)
   }
-  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
-    const imageUrl = []
-    for (let i = 0; i < event.target.files?.length; i++) {
-      const file = event.target.files?.[i]
-      const isVaild = checkFileValidation(file)
-      if (!isVaild) {
-        return
-      }
-      try {
-        const result = await uploadFile({ variables: { file: file } })
-        imageUrl.push(result.data?.uploadFile?.url)
-      } catch (error) {
-        Modal.error({ content: '통신오류입니다. 나중에 다시 시도해 주세요.' })
-      }
-    }
-    setImage([...image, ...imageUrl])
+  const onChangeFile = (images: string, index: number) => {
+    const newImageUrl = [...image]
+    newImageUrl[index] = images
+    setImage(newImageUrl)
   }
   const onClickSubmit = async () => {
     if (writer === '') {
@@ -135,7 +124,11 @@ export default function BoardWrite(props: IBoardWriteProps) {
       content !== ''
     ) {
       try {
-        const result: any = await createBoard({
+        const result: FetchResult<
+          Pick<IMutation, 'createBoard'>,
+          Record<string, any>,
+          Record<string, any>
+        > = await createBoard({
           variables: {
             createBoardInput: {
               writer,
@@ -147,13 +140,17 @@ export default function BoardWrite(props: IBoardWriteProps) {
             },
           },
         })
-        router.push(`/boards/${result.data.createBoard._id}`)
+        router.push(`/boards/${result?.data?.createBoard._id}`)
       } catch (error) {
         if (error instanceof Error) alert(error.message)
       }
     }
   }
   const onClickUpdate = async () => {
+    const currentFiles = JSON.stringify(image)
+    const defaultFiles = JSON.stringify(props.data?.fetchBoard.images)
+    const isChangedFiles = currentFiles !== defaultFiles
+
     if (!post && !content) {
       Modal.error({ content: '제목, 내용중에 입력을 해야합니다.' })
       return
@@ -162,21 +159,18 @@ export default function BoardWrite(props: IBoardWriteProps) {
       Modal.error({ content: '비밀번호를 입력해 주세요.' })
       return
     }
+    const updateBoardInput: IUpdateBoardInput = {}
+    if (post) updateBoardInput.post = post
+    if (content) updateBoardInput.content = content
+    if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl
+    if (isChangedFiles) updateBoardInput.images = image
+
     try {
       await updateBoard({
         variables: {
-          boardId: router.query.boardId,
+          boardId: JSON.stringify(router.query.boardId),
           password,
-          images: image === [] ? props.data?.fetchBoard?.images : image,
-          updateBoardInput: {
-            title: post === '' ? props.data?.fetchBoard?.title : post,
-            contents:
-              content === '' ? props.data?.fetchBoard?.contents : content,
-            youtubeUrl:
-              youtubeUrl === ''
-                ? props.data?.fetchBoard?.youtubeUrl
-                : youtubeUrl,
-          },
+          updateBoardInput: updateBoardInput,
         },
       })
       Modal.success({ content: '수정이 완료되었습니다.' })

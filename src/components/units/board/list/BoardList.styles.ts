@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-
+import { IStyleProps } from './BoardList.types'
 export const Position = styled.div`
   display: flex;
   justify-content: center;
@@ -88,7 +88,7 @@ export const ListIndexNumber = styled.div`
   color: #2155cd;
   width: 10%;
   height: 50px;
-  background-color: ${(props) =>
+  background-color: ${(props: IStyleProps) =>
     props.index % 2 === 0 ? '#79DAE8' : '#0AA1DD'};
 `
 export const ListIndexTitle = styled.div`
@@ -99,13 +99,12 @@ export const ListIndexTitle = styled.div`
   color: #2155cd;
   width: 65%;
   height: 50px;
-  /* padding-left: 100px; */
-  background-color: ${(props) =>
+  background-color: ${(props: IStyleProps) =>
     props.index % 2 === 0 ? '#79DAE8' : '#0AA1DD'};
 `
 export const Word = styled.span`
   /* width: 1200px; */
-  color: ${(props) => (props.isMatched ? '#e8f9fd' : '#2155CD')};
+  color: ${(props: IStyleProps) => (props.isMatched ? '#e8f9fd' : '#2155CD')};
 `
 export const ListIndexWriter = styled.div`
   display: flex;
@@ -115,7 +114,7 @@ export const ListIndexWriter = styled.div`
   height: 50px;
   font-size: 20px;
   color: #2155cd;
-  background-color: ${(props) =>
+  background-color: ${(props: IStyleProps) =>
     props.index % 2 === 0 ? '#79DAE8' : '#0AA1DD'};
 `
 
@@ -127,7 +126,7 @@ export const ListIndexDate = styled.div`
   height: 50px;
   font-size: 20px;
   color: #2155cd;
-  background-color: ${(props) =>
+  background-color: ${(props: IStyleProps) =>
     props.index % 2 === 0 ? '#79DAE8' : '#0AA1DD'};
 `
 export const ListWrapperBottom = styled.div`

@@ -3,6 +3,7 @@ import { IBoardListUIProps } from './BoardList.types'
 import * as S from './BoardList.styles'
 import Paginations01 from '../../../commons/layout/paginations/01/Paginations01.container'
 import { BsPencilFill } from 'react-icons/bs'
+
 export default function BoardListUI(props: IBoardListUIProps) {
   return (
     <S.Position>

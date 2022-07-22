@@ -2,6 +2,7 @@ import * as S from './BoardWrite.styles'
 import { IBoardWriteUIProps } from './BoardWrite.types'
 import { Modal } from 'antd'
 import DaumPostcode from 'react-daum-postcode'
+
 export default function BoardWriteUI(props: IBoardWriteUIProps) {
   return (
     <S.Position>

@@ -8,11 +8,11 @@ import {
   IQueryFetchBoardsCountArgs,
 } from '../../../../commons/types/generated/types'
 import _ from 'lodash'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, MouseEvent, useState } from 'react'
 
 export default function BoardList() {
   const router = useRouter()
-  const [keyword, setKeyword] = useState<string>()
+  const [keyword, setKeyword] = useState('')
   const [isMatched, setIsMatched] = useState(false)
 
   const { data, refetch } = useQuery<
@@ -25,7 +25,7 @@ export default function BoardList() {
     IQueryFetchBoardsCountArgs
   >(FETCH_BOARDS_COUNT)
 
-  const getDebounce = _.debounce((el) => {
+  const getDebounce: _.DebouncedFunc<(el: any) => void> = _.debounce((el) => {
     refetch({ search: el, page: 1 })
     setKeyword(el)
   }, 200)
@@ -43,7 +43,7 @@ export default function BoardList() {
   const onClickMoveBoardWrite = () => {
     router.push('/boards/new')
   }
-  const onClickMoveBoardDetail = (event: any) => {
+  const onClickMoveBoardDetail = (event: MouseEvent<HTMLDivElement>) => {
     router.push(`/boards/${event.currentTarget.id}`)
   }
   return (
