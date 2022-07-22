@@ -16,8 +16,11 @@ import {
   FETCH_USEDITEM_QUESTION_ANSWERS,
 } from './UseditemCommentList.queries'
 import * as S from './UseditemCommentList.styles'
+import { IUseditemCommentListUIItemProps } from './UseditemCommnetList.types'
 
-export default function UseditemCommentListUIItem(props) {
+export default function UseditemCommentListUIItem(
+  props: IUseditemCommentListUIItemProps
+) {
   const router = useRouter()
   const [isEdit, setIsEdit] = useState(false)
   const [isAnswerEdit, setIsAnswerEdit] = useState(false)
@@ -31,7 +34,7 @@ export default function UseditemCommentListUIItem(props) {
     IMutationDeleteUseditemQuestionArgs
   >(DELETE_USEDITEM_QUESTION)
 
-  function onClickUpdate() {
+  const onClickUpdate = () => {
     setIsEdit(true)
   }
 
@@ -43,7 +46,7 @@ export default function UseditemCommentListUIItem(props) {
     try {
       await deleteUseditemQuestion({
         variables: {
-          useditemQuestionId: props.el?._id,
+          useditemQuestionId: JSON.stringify(props.el?._id),
         },
         refetchQueries: [
           {

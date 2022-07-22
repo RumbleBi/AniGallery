@@ -3,8 +3,9 @@ import { CREATE_USED_ITEM, UPDATE_USED_ITEM } from './RegProduct.queries'
 import { useMutation } from '@apollo/client'
 import { useRouter } from 'next/router'
 import { ChangeEvent, useEffect, useState } from 'react'
+import { IDaumParamsProps, IFleamarketRegProps } from './RegProduct.types'
 
-export default function FleamarketReg(props) {
+export default function FleamarketReg(props: IFleamarketRegProps) {
   const router = useRouter()
 
   const [createUseditem] = useMutation(CREATE_USED_ITEM)
@@ -48,8 +49,8 @@ export default function FleamarketReg(props) {
   const onChangeTags = (event: ChangeEvent<HTMLInputElement>) => {
     setTags(event.target.value)
   }
-  // 웹 에디터
-  const onChangeContents = (event: ChangeEvent<HTMLInputElement>) => {
+
+  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(event.target.value)
     if (event.target.value !== '') {
       setContentsError('')
@@ -57,8 +58,8 @@ export default function FleamarketReg(props) {
   }
   // 사진 업로드 데이터 변경시마다 FETCH
   useEffect(() => {
-    if (props.data?.fetchUseditem.images?.length) {
-      setFileUrls([...props.data?.fetchUseditem.images])
+    if (props.data?.fetchUseditem?.images?.length) {
+      setFileUrls([...props.data?.fetchUseditem?.images])
     }
   }, [props.data])
   const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
@@ -70,8 +71,11 @@ export default function FleamarketReg(props) {
   const onClickAddressCancel = () => {
     setIsOpen(false)
   }
-  // Daum API 사용으로인해, 타입지정 찾아야됨
-  const onCompleteAddressSearch = (data: any) => {
+  const onCompleteAddressSearchOk = () => {
+    setIsOpen(false)
+  }
+  // DaumPostCode params docx 참고하여 변수 지정
+  const onCompleteAddressSearch = (data: IDaumParamsProps) => {
     setAddress(data.address)
     setZipcode(data.zonecode)
     setIsOpen(false)
@@ -202,6 +206,7 @@ export default function FleamarketReg(props) {
       remarksError={remarksError}
       contentsError={contentsError}
       priceError={priceError}
+      onCompleteAddressSearchOk={onCompleteAddressSearchOk}
     />
   )
 }

@@ -1,6 +1,7 @@
 import * as S from './fleamarketSignin.styles'
+import { IFleaMarketSigninUIProps } from './fleamarketSignin.types'
 
-export default function FleaMarketSigninUI(props) {
+export default function FleaMarketSigninUI(props: IFleaMarketSigninUIProps) {
   return (
     <S.Position>
       <S.Wrapper>

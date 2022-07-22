@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import * as S from './Payment.styles'
+import { IPaymentBasketUIProps } from './Payment.types'
 
-export default function PaymentBasketUI(props) {
+export default function PaymentBasketUI(props: IPaymentBasketUIProps) {
   return (
     <S.Position>
       <Head>

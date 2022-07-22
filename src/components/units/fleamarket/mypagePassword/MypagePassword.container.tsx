@@ -8,7 +8,6 @@ import {
 } from '../../../../commons/types/generated/types'
 import MyPagePasswordUI from './MypagePassword.presenter'
 import { LOGOUT_USER, RESET_USER_PASSWORD } from './MypagePassword.queries'
-
 export default function MyPagePassword() {
   const { setIsLoggedIn } = useContext(GlobalContext)
   const [newPassword, setNewPassword] = useState('')

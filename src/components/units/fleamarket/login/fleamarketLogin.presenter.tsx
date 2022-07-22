@@ -1,13 +1,9 @@
-import { Fragment, MouseEvent } from 'react'
 import * as S from './fleamarketLogin.styles'
-
-interface INavigationProps {
-  onClickMenu: (event: MouseEvent<HTMLDivElement>) => void
-}
+import { IFleaMarketLoginUIProps } from './fleamarketLogin.types'
 
 const NAVIGATION_FLEAMARKET = [{ name: '회원가입', page: '/fleamarket/signin' }]
 
-export default function FleaMarketLoginUI(props) {
+export default function FleaMarketLoginUI(props: IFleaMarketLoginUIProps) {
   return (
     <S.Position>
       <S.Wrapper>

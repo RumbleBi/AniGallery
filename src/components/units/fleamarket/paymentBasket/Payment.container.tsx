@@ -11,6 +11,13 @@ import {
   CREATE_POINT_TRANSACTION_OF_LOADING,
   FETCH_USER_LOGGED_IN,
 } from './Payment.queries'
+
+// 아임포트 변수들 타입 지정사이트 막힘 https://docs.iamport.kr/tech/imp#param
+declare global {
+  interface Window {
+    IMP?: any
+  }
+}
 export default function PaymentBasket() {
   const router = useRouter()
   const [amount, setAmount] = useState(0)
@@ -24,7 +31,7 @@ export default function PaymentBasket() {
     useQuery<Pick<IQuery, 'fetchUserLoggedIn'>>(FETCH_USER_LOGGED_IN)
 
   const onClickAmount = (event: ChangeEvent<HTMLButtonElement>) => {
-    setAmount(Number(event?.currentTarget.id))
+    setAmount(Number(event.currentTarget.id))
   }
 
   const onClickPayment = () => {
@@ -79,6 +86,3 @@ export default function PaymentBasket() {
     />
   )
 }
-
-// 이벤트를 발생시키는 방법
-// [1. 클릭 등, 직접 이벤트 발생, 2. 가만히 있는데, 특정 시간에 자동으로 이벤트 발생 ] => 크론탭

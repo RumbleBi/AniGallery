@@ -5,8 +5,9 @@ import {
 } from '../../../../../commons/types/generated/types'
 import { FETCH_USEDITEM_QUESTION_ANSWERS } from './UseditemAnswerList.queries'
 import UseditemAnswerListUI from './UseditemAnswerList.presenter'
+import { IUseditemAnswerListProps } from './UseditemAnswerList.types'
 
-export default function UseditemAnswerList(props) {
+export default function UseditemAnswerList(props: IUseditemAnswerListProps) {
   const { data, fetchMore } = useQuery<
     Pick<IQuery, 'fetchUseditemQuestionAnswers'>,
     IQueryFetchUseditemQuestionAnswersArgs

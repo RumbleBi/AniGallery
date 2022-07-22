@@ -1,6 +1,9 @@
 import * as S from './UseditemCommentWrite.styles'
+import { IUseditemCommentWriteUIProps } from './UseditemCommentWrite.types'
 
-export default function UseditemCommentWriteUI(props) {
+export default function UseditemCommentWriteUI(
+  props: IUseditemCommentWriteUIProps
+) {
   return (
     <S.Position>
       <S.Wrapper>

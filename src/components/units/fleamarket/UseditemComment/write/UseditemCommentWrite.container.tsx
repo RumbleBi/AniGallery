@@ -5,7 +5,6 @@ import {
   IMutation,
   IMutationCreateUseditemQuestionArgs,
   IMutationUpdateUseditemQuestionArgs,
-  IUpdateUseditemQuestionInput,
 } from '../../../../../commons/types/generated/types'
 import UseditemCommentWriteUI from './UseditemCommentWrite.presenter'
 import {
@@ -14,8 +13,14 @@ import {
 } from './UseditemCommentWrite.queries'
 import { Modal } from 'antd'
 import { FETCH_USEDITEM_QUESTIONS } from '../list/UseditemCommentList.queries'
+import {
+  IUpdateUseditemQuestionInput,
+  IUseditemCommentWriteProps,
+} from './UseditemCommentWrite.types'
 
-export default function UseditemCommentWrite(props) {
+export default function UseditemCommentWrite(
+  props: IUseditemCommentWriteProps
+) {
   const router = useRouter()
 
   const [contents, setContents] = useState('')
@@ -68,8 +73,10 @@ export default function UseditemCommentWrite(props) {
 
       await updateUseditemQuestion({
         variables: {
-          updateUseditemQuestionInput,
-          useditemQuestionId: props.el?._id,
+          updateUseditemQuestionInput: {
+            contents,
+          },
+          useditemQuestionId: JSON.stringify(props.el?._id),
         },
         refetchQueries: [
           {

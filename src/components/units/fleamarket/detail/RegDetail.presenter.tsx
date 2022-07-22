@@ -2,7 +2,8 @@ import Button02 from '../../../commons/buttons/02'
 import * as S from './RegDetail.styles'
 import { BsHeart, BsHeartFill } from 'react-icons/bs'
 import { getDate } from '../../../../commons/libraries/utils'
-export default function RegDetailUI(props) {
+import { IRegDetailUIProps } from './RegDetail.types'
+export default function RegDetailUI(props: IRegDetailUIProps) {
   return (
     <S.Position>
       <S.Wrapper>
@@ -31,7 +32,7 @@ export default function RegDetailUI(props) {
           <S.Price>가격 : {props.data?.fetchUseditem?.price} 포인트</S.Price>
           <S.Tags>
             태그 :
-            {props.data?.fetchUseditem?.tags.map(
+            {props.data?.fetchUseditem?.tags?.map(
               (el: string, index: number) => (
                 <span key={index}>{el}</span>
               )
@@ -70,7 +71,7 @@ export default function RegDetailUI(props) {
           </S.ImageWrapper>
         </S.UseditemDetailWrapper>
         {props.userData?.fetchUserLoggedIn._id ===
-        props.data?.fetchUseditem.seller._id ? (
+        props.data?.fetchUseditem?.seller?._id ? (
           <S.ButtonWrapper>
             <Button02 onClick={props.onClickMoveToMain} name={'목록으로'} />
             <Button02 onClick={props.onClickMoveToEdit} name={'수정하기'} />

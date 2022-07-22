@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client'
 import {
   IQuery,
   IQueryFetchUseditemsArgs,
+  IUseditem,
 } from '../../../../commons/types/generated/types'
 import FleamarketMainUI from './fleamarketMain.presenter'
 import { FETCH_USED_ITEMS } from './fleamarketMain.queries'
@@ -11,6 +12,7 @@ import { getDate2 } from '../../../../commons/libraries/utils'
 import { useContext, useState } from 'react'
 import { GlobalContext } from '../../../../../pages/_app'
 import { useFetchUserInfo } from '../../../commons/hooks/useUserLoggedIn'
+
 export default function FleamarketMain() {
   const { setItem } = useContext(GlobalContext)
   const [keyword, setKeyword] = useState('')
@@ -53,9 +55,9 @@ export default function FleamarketMain() {
     router.push('/fleamarket/reg')
   }
   // 게시글 상세페이지 이동
-  const onClickMoveToDetail = (el) => () => {
+  const onClickMoveToDetail = (el: IUseditem) => () => {
     const baskets = JSON.parse(localStorage.getItem(todayDate) || '[]')
-    const temp = baskets.filter((filterEl) => filterEl._id !== el._id)
+    const temp = baskets.filter((filterEl: any) => filterEl._id !== el._id)
     const { __typename, ...plus } = el
     temp.unshift(plus)
     localStorage.setItem(todayDate, JSON.stringify(temp))
@@ -79,4 +81,3 @@ export default function FleamarketMain() {
     />
   )
 }
-// 일단 메인페이지 비로그인해도 로그인 가능하게 해놓음 바꿀수도있음.

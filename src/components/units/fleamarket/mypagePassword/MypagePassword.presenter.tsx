@@ -1,6 +1,7 @@
 import * as S from './MypagePassword.styles'
+import { IMyPagePasswordUIProps } from './MypagePassword.types'
 
-export default function MyPagePasswordUI(props) {
+export default function MyPagePasswordUI(props: IMyPagePasswordUIProps) {
   return (
     <S.Position>
       <S.Title>비밀번호변경</S.Title>

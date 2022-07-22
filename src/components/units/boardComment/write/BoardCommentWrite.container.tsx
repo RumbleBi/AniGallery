@@ -48,8 +48,8 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
       await createBoardComment({
         variables: {
           createBoardCommentInput: {
-            writer: writer,
-            password: password,
+            writer,
+            password,
             contents: content,
             rating: star,
           },
@@ -91,7 +91,7 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
         variables: {
           updateBoardCommentInput,
           password,
-          boardCommentId: props.el?._id,
+          boardCommentId: JSON.stringify(props.el?._id),
         },
         refetchQueries: [
           {

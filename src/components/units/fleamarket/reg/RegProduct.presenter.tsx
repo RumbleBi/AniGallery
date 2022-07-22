@@ -3,15 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import Uploads01 from '../../../commons/uploads/01/Uploads01.container'
 import { Modal } from 'antd'
 import DaumPostcode from 'react-daum-postcode'
-import { ChangeEvent } from 'react'
-interface IFleamarketRegUIProps {
-  onClickSubmit: () => void
-  onClickUpdate: () => void
-  onClickAddressCancel: () => void
-  onCompleteAddressSearch: () => void
-  onChangeTags: (event: ChangeEvent<HTMLInputElement>) => void
-  isEdit: boolean
-}
+import { IFleamarketRegUIProps } from './RegProduct.types'
 
 export default function FleamarketRegUI(props: IFleamarketRegUIProps) {
   return (
@@ -23,7 +15,7 @@ export default function FleamarketRegUI(props: IFleamarketRegUIProps) {
           closable={false}
           cancelText={'취소'}
           okText={'확인'}
-          onOk={props.onCompleteAddressSearch}
+          onOk={props.onCompleteAddressSearchOk}
           onCancel={props.onClickAddressCancel}
         >
           <DaumPostcode onComplete={props.onCompleteAddressSearch} />

@@ -1,8 +1,11 @@
 import * as S from './UseditemCommentList.styles'
 import InfiniteScroll from 'react-infinite-scroller'
 import UseditemCommentListUIItem from './UseditemCommentList.presenterItem'
+import { IUseditemCommentListUIProps } from './UseditemCommnetList.types'
 
-export default function UseditemCommentListUI(props) {
+export default function UseditemCommentListUI(
+  props: IUseditemCommentListUIProps
+) {
   if (!props.data) return <div />
   return (
     <S.Position>
@@ -17,7 +20,7 @@ export default function UseditemCommentListUI(props) {
               <UseditemCommentListUIItem
                 key={el._id}
                 el={el}
-                onClickDelete={props.onClickDelete}
+                // onClickDelete={props.onClickDelete}
               />
             ))}
           </InfiniteScroll>

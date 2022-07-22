@@ -26,6 +26,7 @@ export default function RegDetail() {
   )
   const { data: userData } =
     useQuery<Pick<IQuery, 'fetchUserLoggedIn'>>(FETCH_USER_LOGGED_IN)
+
   const { data } = useQuery<
     Pick<IQuery, 'fetchUseditem'>,
     IQueryFetchUseditemArgs
@@ -86,7 +87,7 @@ export default function RegDetail() {
   }
   return (
     <RegDetailUI
-      data={data && data}
+      data={data}
       userData={userData}
       onClickDeleteUseditem={onClickDeleteUseditem}
       onClickMoveToMain={onClickMoveToMain}

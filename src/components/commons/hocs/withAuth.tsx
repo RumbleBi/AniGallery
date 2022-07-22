@@ -1,13 +1,22 @@
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
+import { GlobalContext } from '../../../../pages/_app'
+import { getAccessToken } from '../../../commons/libraries/getAccessToken'
 
 export const withAuth = (Component: any) => (props: any) => {
+  const { accessToken } = useContext(GlobalContext)
   const router = useRouter()
   useEffect(() => {
-    if (!document.cookie) {
-      alert('로그인이 필요한 서비스 입니다.')
-      router.push('/fleamarket/login')
+    async function getToken() {
+      if (!accessToken) {
+        const newAccessToken = await getAccessToken()
+        if (!newAccessToken) {
+          alert('로그인을 먼저 해주세요!!!')
+          router.push('/login')
+        }
+      }
     }
+    getToken()
   }, [])
   return <Component {...props} />
 }

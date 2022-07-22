@@ -17,7 +17,7 @@ export default function FleaMarketLogin() {
     IMutationLoginUserArgs
   >(LOGIN_USER)
 
-  const { setAccessToken, setUserInfo, isLoggedIn, setIsLoggedIn } =
+  const { setAccessToken, setUserInfo, setIsLoggedIn } =
     useContext(GlobalContext)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')

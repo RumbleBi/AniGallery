@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
+import { MouseEvent } from 'react'
 import {
   IQuery,
   IQueryFetchUseditemQuestionsArgs,
@@ -10,6 +11,7 @@ import {
   FETCH_USEDITEM_QUESTION,
   FETCH_USEDITEM_QUESTIONS,
 } from './UseditemCommentList.queries'
+
 export default function UseditemCommentList() {
   const router = useRouter()
   const { data, fetchMore } = useQuery<
@@ -19,24 +21,24 @@ export default function UseditemCommentList() {
     variables: { useditemId: String(router.query.useditemId) },
   })
 
-  const [deleteUseditemQuestion] = useMutation(DELETE_USEDITEM_QUESTION)
-  const onClickDelete = async (event) => {
-    try {
-      await deleteUseditemQuestion({
-        variables: {
-          useditemQuestionId: event.target.id,
-        },
-        refetchQueries: [
-          {
-            query: FETCH_USEDITEM_QUESTION,
-            variables: { useditemId: router.query.useditemId, page: 1 },
-          },
-        ],
-      })
-    } catch (error) {
-      if (error instanceof Error) alert(error.message)
-    }
-  }
+  // const [deleteUseditemQuestion] = useMutation(DELETE_USEDITEM_QUESTION)
+  // const onClickDelete = async (event) => {
+  //   try {
+  //     await deleteUseditemQuestion({
+  //       variables: {
+  //         useditemQuestionId: event.target.id,
+  //       },
+  //       refetchQueries: [
+  //         {
+  //           query: FETCH_USEDITEM_QUESTION,
+  //           variables: { useditemId: router.query.useditemId, page: 1 },
+  //         },
+  //       ],
+  //     })
+  //   } catch (error) {
+  //     if (error instanceof Error) alert(error.message)
+  //   }
+  // }
   function onLoadMore() {
     if (!data) return
 
@@ -60,7 +62,7 @@ export default function UseditemCommentList() {
     <UseditemCommentListUI
       data={data}
       onLoadMore={onLoadMore}
-      onClickDelete={onClickDelete}
+      // onClickDelete={onClickDelete}
     />
   )
 }

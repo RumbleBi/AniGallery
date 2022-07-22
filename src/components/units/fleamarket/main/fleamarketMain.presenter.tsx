@@ -2,7 +2,8 @@ import * as S from './fleamarketMain.styles'
 import InfiniteScroll from 'react-infinite-scroller'
 import Dompurify from 'dompurify'
 import Searchbars01 from '../../../commons/searchbars/01/Searchbars01.container'
-export default function FleamarketMainUI(props) {
+import { IFleamarketMainUIProps } from './fleamarketMain.types'
+export default function FleamarketMainUI(props: IFleamarketMainUIProps) {
   return (
     <S.Position>
       <S.Wrapper>
@@ -30,7 +31,7 @@ export default function FleamarketMainUI(props) {
                   <S.DataInfo>가격 : {el.price} 포인트</S.DataInfo>
                   <S.DataInfo>
                     태그 :
-                    {el.tags.map((el: string, index: number) => (
+                    {el.tags?.map((el: string, index: number) => (
                       <S.Tag key={index}>{el}</S.Tag>
                     ))}
                   </S.DataInfo>

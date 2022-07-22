@@ -8,7 +8,9 @@ import {
 } from '../../../../commons/types/generated/types'
 import FleaMarketSigninUI from './fleamarketSignin.presenter'
 import { CREATE_USER } from './fleamarketSignin.queries'
+
 export default function FleaMarketSignin() {
+  // 정규식을 활용하여 가입 양식 설정
   const RegexEmail =
     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
   // .뒤에 2~3글자만 통과
