@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, MouseEvent, useState } from 'react'
 import {
   IMutation,
   IMutationCreatePointTransactionOfLoadingArgs,
@@ -30,7 +30,7 @@ export default function PaymentBasket() {
   const { data } =
     useQuery<Pick<IQuery, 'fetchUserLoggedIn'>>(FETCH_USER_LOGGED_IN)
 
-  const onClickAmount = (event: ChangeEvent<HTMLButtonElement>) => {
+  const onClickAmount = (event: MouseEvent<HTMLButtonElement>) => {
     setAmount(Number(event.currentTarget.id))
   }
 

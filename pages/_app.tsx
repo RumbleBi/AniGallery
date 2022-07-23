@@ -37,6 +37,7 @@ interface IGlobalContext {
   isLoggedIn?: boolean
   setIsLoggedIn?: Dispatch<SetStateAction<boolean>>
 }
+
 export const GlobalContext = createContext<IGlobalContext>({})
 
 function MyApp({ Component, pageProps }: AppProps) {

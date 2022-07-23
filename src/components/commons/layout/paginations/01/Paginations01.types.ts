@@ -4,6 +4,7 @@ import {
   IQuery,
   IQueryFetchBoardsArgs,
   IQueryFetchPointTransactionsOfBuyingArgs,
+  IQueryFetchPointTransactionsOfLoadingArgs,
   IQueryFetchPointTransactionsOfSellingArgs,
   IQueryFetchUseditemsIPickedArgs,
 } from '../../../../../commons/types/generated/types'
@@ -25,6 +26,11 @@ export interface IPaginations01Props {
     variables?: Partial<IQueryFetchPointTransactionsOfSellingArgs> | undefined
   ) => Promise<
     ApolloQueryResult<Pick<IQuery, 'fetchPointTransactionsOfSelling'>>
+  >
+  refetchPointInfo?: (
+    variables?: Partial<IQueryFetchPointTransactionsOfLoadingArgs> | undefined
+  ) => Promise<
+    ApolloQueryResult<Pick<IQuery, 'fetchPointTransactionsOfLoading'>>
   >
 }
 
