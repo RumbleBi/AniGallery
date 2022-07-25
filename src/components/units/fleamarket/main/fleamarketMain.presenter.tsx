@@ -16,7 +16,6 @@ export default function FleamarketMainUI(props: IFleamarketMainUIProps) {
             onChangeKeyword={props.onChangeKeyword}
           />
         </S.SelectBtnsWrapper>
-
         <S.ListWrapper>
           <InfiniteScroll
             pageStart={0}
@@ -30,7 +29,7 @@ export default function FleamarketMainUI(props: IFleamarketMainUIProps) {
                   <S.DataInfo>제목 : {el.remarks}</S.DataInfo>
                   <S.DataInfo>가격 : {el.price} 포인트</S.DataInfo>
                   <S.DataInfo>
-                    태그 :
+                    x 태그 :
                     {el.tags?.map((el: string, index: number) => (
                       <S.Tag key={index}>{el}</S.Tag>
                     ))}

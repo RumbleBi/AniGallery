@@ -57,7 +57,9 @@ export default function FleamarketMain() {
   // 게시글 상세페이지 이동
   const onClickMoveToDetail = (el: IUseditem) => () => {
     const baskets = JSON.parse(localStorage.getItem(todayDate) || '[]')
-    const temp = baskets.filter((filterEl: any) => filterEl._id !== el._id)
+    const temp = baskets.filter(
+      (filterEl: IUseditem) => filterEl._id !== el._id
+    )
     const { __typename, ...plus } = el
     temp.unshift(plus)
     localStorage.setItem(todayDate, JSON.stringify(temp))
