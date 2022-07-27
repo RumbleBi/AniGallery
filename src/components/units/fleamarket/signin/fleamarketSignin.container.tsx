@@ -121,7 +121,7 @@ export default function FleaMarketSignin() {
       return
     }
     try {
-      const result = await createUser({
+      await createUser({
         variables: {
           createUserInput: {
             email,
