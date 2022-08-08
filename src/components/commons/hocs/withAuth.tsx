@@ -11,8 +11,8 @@ export const withAuth = (Component: any) => (props: any) => {
       if (!accessToken) {
         const newAccessToken = await getAccessToken()
         if (!newAccessToken) {
-          alert('로그인을 먼저 해주세요!!!')
-          router.push('/login')
+          alert('로그인이 필요한 페이지 입니다.')
+          router.push('/fleamarket/login')
         }
       }
     }
