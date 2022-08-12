@@ -118,6 +118,7 @@ export const Contents = styled.div`
   background-color: white;
   padding-left: 20px;
   padding-top: 10px;
+  word-break: break-all;
 `
 export const PickitemWrapper = styled.div`
   border-top: 1px solid #2155cd;

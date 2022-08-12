@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { Modal } from 'antd'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   IQuery,
   IQueryFetchUseditemArgs,
@@ -18,12 +18,12 @@ import {
 export default function RegDetail() {
   const router = useRouter()
   const [myPick, setMyPick] = useState(false)
-
   const [deleteUseditem] = useMutation(DELETE_USED_ITEM)
   const [toggleUseditemPick] = useMutation(TOGGLE_USEDITEM_PICK)
   const [createPointTransactionOfBuyingAndSelling] = useMutation(
     CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING
   )
+
   const { data: userData } =
     useQuery<Pick<IQuery, 'fetchUserLoggedIn'>>(FETCH_USER_LOGGED_IN)
 
@@ -33,9 +33,19 @@ export default function RegDetail() {
   >(FETCH_USED_ITEM, {
     variables: { useditemId: String(router.query.useditemId) },
   })
+
+  useEffect(() => {
+    if (localStorage.getItem(String(router.query.useditemId))) {
+      setMyPick(true)
+    } else {
+      setMyPick(false)
+    }
+  })
+
   const onClickMyPick = async () => {
     try {
       setMyPick((prev) => !prev)
+      localStorage.setItem(String(router.query.useditemId), JSON.stringify(1))
       await toggleUseditemPick({
         variables: { useditemId: String(router.query.useditemId) },
       })
@@ -47,6 +57,7 @@ export default function RegDetail() {
   const onClickMyPickCancel = async () => {
     try {
       setMyPick((prev) => !prev)
+      localStorage.removeItem(String(router.query.useditemId))
       await toggleUseditemPick({
         variables: { useditemId: String(router.query.useditemId) },
       })
@@ -56,6 +67,7 @@ export default function RegDetail() {
     alert('찜목록에서 빠졌습니다!')
   }
 
+  // console.log(localStorage.getItem(String(router.query.useditemId)))
   const onClickMoveToMain = () => {
     router.push('/fleamarket/main')
   }

@@ -9,7 +9,7 @@ import FleamarketMainUI from './fleamarketMain.presenter'
 import { FETCH_USED_ITEMS } from './fleamarketMain.queries'
 import router from 'next/router'
 import { getDate2 } from '../../../../commons/libraries/utils'
-import { useContext, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '../../../../../pages/_app'
 import { useFetchUserInfo } from '../../../commons/hooks/useUserLoggedIn'
 
@@ -70,6 +70,7 @@ export default function FleamarketMain() {
   function onChangeKeyword(value: string) {
     setKeyword(value)
   }
+
   return (
     <FleamarketMainUI
       data={data}

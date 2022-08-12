@@ -82,6 +82,7 @@ export const DateContents = styled.div`
   margin: 20px 0px;
   background-color: #0aa1dd;
   color: #2155cd;
+  word-break: break-all;
 `
 export const ImageWrapper = styled.div`
   display: flex;
