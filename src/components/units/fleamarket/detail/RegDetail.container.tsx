@@ -34,6 +34,7 @@ export default function RegDetail() {
     variables: { useditemId: String(router.query.useditemId) },
   })
 
+  // 상세페이지 진입시 찜된 상품인지 확인로직
   useEffect(() => {
     if (localStorage.getItem(String(router.query.useditemId))) {
       setMyPick(true)
@@ -67,7 +68,6 @@ export default function RegDetail() {
     alert('찜목록에서 빠졌습니다!')
   }
 
-  // console.log(localStorage.getItem(String(router.query.useditemId)))
   const onClickMoveToMain = () => {
     router.push('/fleamarket/main')
   }
