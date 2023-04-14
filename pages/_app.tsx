@@ -41,6 +41,7 @@ interface IGlobalContext {
 export const GlobalContext = createContext<IGlobalContext>({})
 
 function MyApp({ Component, pageProps }: AppProps) {
+  console.log('eslint 작동검사')
   const [accessToken, setAccessToken] = useState('')
   const [userInfo, setUserInfo] = useState({})
   const [item, setItem] = useState([])
