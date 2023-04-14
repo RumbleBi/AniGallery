@@ -41,21 +41,12 @@ interface IGlobalContext {
 export const GlobalContext = createContext<IGlobalContext>({});
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const test = {
-    a: 10,
-    b: 20,
-    c: 30,
-  };
-  const test3 = {
-    a: 20,
-    b: 30,
-    c: 1,
-    d: 12937184718,
-    e: 1883847319,
-    f: 1238718238,
-  };
+  for (let i = 0; i < 10; i++) {
+    console.log(i);
+  }
 
   console.log("eslint 작동검사");
+
   const [accessToken, setAccessToken] = useState("");
   const [userInfo, setUserInfo] = useState({});
   const [item, setItem] = useState([]);
