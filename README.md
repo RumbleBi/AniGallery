@@ -9,7 +9,9 @@
 ## 역할소개
 
 **포지션** : `front-end`
+<br />
 **역할** : `Git Manager`
+<br />
 **사용기술** : `next.js` `Typescript` `emotion.js` `GraphQL / Apollo` `GCP` `Docker` `git / Github` `Antd` `eslint`
 
 ---
