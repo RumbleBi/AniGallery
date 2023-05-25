@@ -1,131 +1,131 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/router'
-import { FetchResult, useMutation } from '@apollo/client'
-import BoardWriteUI from './BoardWrite.presenter'
-import { CREATE_BOARD, UPDATE_BOARD, UPLOAD_FILE } from './BoardWrite.queries'
-import { IBoardWriteProps, IUpdateBoardInput } from './BoardWrite.types'
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
+import { FetchResult, useMutation } from "@apollo/client";
+import BoardWriteUI from "./BoardWrite.presenter";
+import { CREATE_BOARD, UPDATE_BOARD, UPLOAD_FILE } from "./BoardWrite.queries";
+import { IBoardWriteProps, IUpdateBoardInput } from "./BoardWrite.types";
 import {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
   IMutationUploadFileArgs,
-} from '../../../../commons/types/generated/types'
-import { Modal } from 'antd'
-import { checkFileValidation } from '../../../../commons/libraries/utils'
+} from "../../../../commons/types/generated/types";
+import { Modal } from "antd";
+import { checkFileValidation } from "../../../../commons/libraries/utils";
 
 export default function BoardWrite(props: IBoardWriteProps) {
-  const router = useRouter()
+  const router = useRouter();
   // useRef로 포커싱 되도록 함
-  const inputRef = useRef<HTMLInputElement>()
-  const fileRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>();
+  const fileRef = useRef<HTMLInputElement>(null);
   // 렌더링 될 때, 작성자에 포커싱이 되도록 함
   useEffect(() => {
-    inputRef.current?.focus()
-  }, [])
+    inputRef.current?.focus();
+  }, []);
   const [createBoard] = useMutation<
-    Pick<IMutation, 'createBoard'>,
+    Pick<IMutation, "createBoard">,
     IMutationCreateBoardArgs
-  >(CREATE_BOARD)
+  >(CREATE_BOARD);
   const [updateBoard] = useMutation<
-    Pick<IMutation, 'updateBoard'>,
+    Pick<IMutation, "updateBoard">,
     IMutationUpdateBoardArgs
-  >(UPDATE_BOARD)
+  >(UPDATE_BOARD);
   const [uploadFile] = useMutation<
-    Pick<IMutation, 'uploadFile'>,
+    Pick<IMutation, "uploadFile">,
     IMutationUploadFileArgs
-  >(UPLOAD_FILE)
+  >(UPLOAD_FILE);
 
-  const [isActive, setIsActive] = useState(false)
-  const [youtubeUrl, setYoutubeUrl] = useState('')
-  const [writer, setWriter] = useState('')
-  const [password, setPassword] = useState('')
-  const [post, setPost] = useState('')
-  const [content, setContent] = useState('')
-  const [image, setImage] = useState(['', '', ''])
-  const [writerError, setWriterError] = useState('')
-  const [passwordError, setPasswordError] = useState('')
-  const [postError, setPostError] = useState('')
-  const [contentError, setContentError] = useState('')
+  const [isActive, setIsActive] = useState(false);
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [writer, setWriter] = useState("");
+  const [password, setPassword] = useState("");
+  const [post, setPost] = useState("");
+  const [content, setContent] = useState("");
+  const [image, setImage] = useState(["", "", ""]);
+  const [writerError, setWriterError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [postError, setPostError] = useState("");
+  const [contentError, setContentError] = useState("");
 
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
-    setWriter(event.target.value)
-    if (event.target.value !== '') {
-      setWriterError('')
+    setWriter(event.target.value);
+    if (event.target.value !== "") {
+      setWriterError("");
     }
     if (event.target.value && writer && password && post && content) {
-      setIsActive(true)
+      setIsActive(true);
     } else {
-      setIsActive(false)
+      setIsActive(false);
     }
-  }
+  };
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value)
-    if (event.target.value !== '') {
-      setPasswordError('')
+    setPassword(event.target.value);
+    if (event.target.value !== "") {
+      setPasswordError("");
     }
     if (event.target.value && writer && password && post && content) {
-      setIsActive(true)
+      setIsActive(true);
     } else {
-      setIsActive(false)
+      setIsActive(false);
     }
-  }
+  };
   const onChangePost = (event: ChangeEvent<HTMLInputElement>) => {
-    setPost(event.target.value)
-    if (event.target.value !== '') {
-      setPostError('')
+    setPost(event.target.value);
+    if (event.target.value !== "") {
+      setPostError("");
     }
     if (event.target.value && writer && password && post && content) {
-      setIsActive(true)
+      setIsActive(true);
     } else {
-      setIsActive(false)
+      setIsActive(false);
     }
-  }
+  };
   const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(event.target.value)
-    if (event.target.value !== '') {
-      setContentError('')
+    setContent(event.target.value);
+    if (event.target.value !== "") {
+      setContentError("");
     }
     if (event.target.value && writer && password && post && content) {
-      setIsActive(true)
+      setIsActive(true);
     } else {
-      setIsActive(false)
+      setIsActive(false);
     }
-  }
+  };
   const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
-    setYoutubeUrl(event.target.value)
-  }
+    setYoutubeUrl(event.target.value);
+  };
   const onChangeFile = (images: string, index: number) => {
-    const newImageUrl = [...image]
-    newImageUrl[index] = images
-    setImage(newImageUrl)
-  }
+    const newImageUrl = [...image];
+    newImageUrl[index] = images;
+    setImage(newImageUrl);
+  };
   const onClickSubmit = async () => {
-    if (writer === '') {
-      setWriterError('작성자를 입력해주세요.')
-      window.scrollTo(0, 0)
+    if (writer === "") {
+      setWriterError("작성자를 입력해주세요.");
+      window.scrollTo(0, 0);
     }
     if (password.length > 16 || password.length < 8) {
-      setPasswordError('비밀번호를 8~16자리 사이로 입력해주세요.')
-      window.scrollTo(0, 0)
+      setPasswordError("비밀번호를 8~16자리 사이로 입력해주세요.");
+      window.scrollTo(0, 0);
     }
-    if (post === '') {
-      setPostError('제목을 입력해주세요.')
-      window.scrollTo(0, 200)
+    if (post === "") {
+      setPostError("제목을 입력해주세요.");
+      window.scrollTo(0, 200);
     }
-    if (content === '') {
-      setContentError('내용을 입력해 주세요.')
-      window.scrollTo(0, 400)
+    if (content === "") {
+      setContentError("내용을 입력해 주세요.");
+      window.scrollTo(0, 400);
     }
     if (
-      writer !== '' &&
+      writer !== "" &&
       password.length >= 8 &&
       password.length <= 16 &&
-      post !== '' &&
-      content !== ''
+      post !== "" &&
+      content !== ""
     ) {
       try {
         const result: FetchResult<
-          Pick<IMutation, 'createBoard'>,
+          Pick<IMutation, "createBoard">,
           Record<string, any>,
           Record<string, any>
         > = await createBoard({
@@ -139,31 +139,31 @@ export default function BoardWrite(props: IBoardWriteProps) {
               images: image,
             },
           },
-        })
-        router.push(`/boards/${result?.data?.createBoard._id}`)
+        });
+        router.push(`/boards/${result?.data?.createBoard._id}`);
       } catch (error) {
-        if (error instanceof Error) alert(error.message)
+        if (error instanceof Error) alert(error.message);
       }
     }
-  }
+  };
   const onClickUpdate = async () => {
-    const currentFiles = JSON.stringify(image)
-    const defaultFiles = JSON.stringify(props.data?.fetchBoard.images)
-    const isChangedFiles = currentFiles !== defaultFiles
+    const currentFiles = JSON.stringify(image);
+    const defaultFiles = JSON.stringify(props.data?.fetchBoard.images);
+    const isChangedFiles = currentFiles !== defaultFiles;
 
     if (!post && !content) {
-      Modal.error({ content: '제목, 내용중에 입력을 해야합니다.' })
-      return
+      Modal.error({ content: "제목, 내용중에 입력을 해야합니다." });
+      return;
     }
     if (!password) {
-      Modal.error({ content: '비밀번호를 입력해 주세요.' })
-      return
+      Modal.error({ content: "비밀번호를 입력해 주세요." });
+      return;
     }
-    const updateBoardInput: IUpdateBoardInput = {}
-    if (post) updateBoardInput.post = post
-    if (content) updateBoardInput.content = content
-    if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl
-    if (isChangedFiles) updateBoardInput.images = image
+    const updateBoardInput: IUpdateBoardInput = {};
+    if (post) updateBoardInput.post = post;
+    if (content) updateBoardInput.content = content;
+    if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
+    if (isChangedFiles) updateBoardInput.images = image;
 
     try {
       await updateBoard({
@@ -172,16 +172,16 @@ export default function BoardWrite(props: IBoardWriteProps) {
           password,
           updateBoardInput: updateBoardInput,
         },
-      })
-      Modal.success({ content: '수정이 완료되었습니다.' })
-      router.push(`/boards/${router.query.boardId}`)
+      });
+      Modal.success({ content: "수정이 완료되었습니다." });
+      router.push(`/boards/${router.query.boardId}`);
     } catch (error) {
-      if (error instanceof Error) alert(error.message)
+      if (error instanceof Error) alert(error.message);
     }
-  }
+  };
   const onClickImage = () => {
-    fileRef.current?.click()
-  }
+    fileRef.current?.click();
+  };
   return (
     <BoardWriteUI
       isActive={isActive}
@@ -204,5 +204,5 @@ export default function BoardWrite(props: IBoardWriteProps) {
       contentError={contentError}
       inputRef={inputRef}
     />
-  )
+  );
 }

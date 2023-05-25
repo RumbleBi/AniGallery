@@ -1,6 +1,6 @@
-import Head from 'next/head'
-import * as S from './Payment.styles'
-import { IPaymentBasketUIProps } from './Payment.types'
+import Head from "next/head";
+import * as S from "./Payment.styles";
+import { IPaymentBasketUIProps } from "./Payment.types";
 
 export default function PaymentBasketUI(props: IPaymentBasketUIProps) {
   return (
@@ -21,21 +21,21 @@ export default function PaymentBasketUI(props: IPaymentBasketUIProps) {
         </S.Title>
         <S.SelectPaymentWrapper>
           <div>
-            <S.ChargingBtn id={'5000'} onClick={props.onClickAmount}>
+            <S.ChargingBtn id={"5000"} onClick={props.onClickAmount}>
               5000원
             </S.ChargingBtn>
-            <S.ChargingBtn id={'10000'} onClick={props.onClickAmount}>
+            <S.ChargingBtn id={"10000"} onClick={props.onClickAmount}>
               10000원
             </S.ChargingBtn>
-            <S.ChargingBtn id={'20000'} onClick={props.onClickAmount}>
+            <S.ChargingBtn id={"20000"} onClick={props.onClickAmount}>
               20000원
             </S.ChargingBtn>
           </div>
           <div>
-            <S.ChargingBtn id={'50000'} onClick={props.onClickAmount}>
+            <S.ChargingBtn id={"50000"} onClick={props.onClickAmount}>
               50000원
             </S.ChargingBtn>
-            <S.ChargingBtn id={'100'} onClick={props.onClickAmount}>
+            <S.ChargingBtn id={"100"} onClick={props.onClickAmount}>
               100원
             </S.ChargingBtn>
             <S.ChargeAmount>금액 : {props.amount}</S.ChargeAmount>
@@ -44,5 +44,5 @@ export default function PaymentBasketUI(props: IPaymentBasketUIProps) {
         <S.ChargeBtn onClick={props.onClickPayment}>충전하기</S.ChargeBtn>
       </S.Wrapper>
     </S.Position>
-  )
+  );
 }
