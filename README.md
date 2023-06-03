@@ -2,17 +2,11 @@
 
 ---
 
-#### 프로젝트 기간(리팩토링 기간 추가) : 2022.01.10 ~ 2022.05.01
+#### 프로젝트 기간(리팩토링 기간) : 2022.01.10 ~ 2022.05.01
 
----
+#### 서비스 설명 : 애니메이션에 관심이 있는 유저들이 자유롭게 이야기하고 중고 굿즈들을 판매할 수 있는 사이트.
 
-## 역할소개
-
-**포지션** : `front-end`
-<br />
-**역할** : `Git Manager`
-<br />
-**사용기술** : `next.js` `Typescript` `emotion.js` `GraphQL / Apollo` `GCP` `Docker` `git / Github` `Antd` `eslint`
+#### 사용기술 : `next.js` `Typescript` `emotion.js` `GraphQL / Apollo` `GCP` `Docker` `git / Github` `Antd` `eslint`
 
 ---
 
